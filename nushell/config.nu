@@ -47,3 +47,5 @@ $env.config.keybindings = (
     | prepend $keybind_reload_condfig
     | uniq-by name
 )
+
+source ~/.zoxide.nu
