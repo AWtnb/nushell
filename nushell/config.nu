@@ -1,21 +1,6 @@
 # config.nu
-#
-# Installed by:
-# version = "0.113.1"
-#
-# This file is used to override default Nushell settings, define
-# (or import) custom commands, or run any other startup tasks.
-# See https://www.nushell.sh/book/configuration.html
-#
-# Nushell sets "sensible defaults" for most configuration settings, 
-# so your `config.nu` only needs to override these defaults if desired.
-#
-# You can open this file in your default editor using:
-#     config nu
-#
-# You can also pretty-print and page through the documentation for configuration
-# options using:
-#     config nu --doc | nu-highlight | less -R
+
+source settings/keybindings.nu
 
 # https://memo.laughk.org/articles/2022-11-28-nushell-config-for-wezterm/
 $env.config.shell_integration = (
@@ -29,45 +14,6 @@ def hello [] {
     "Hello, World!"
 }
 
-def fuzzy-ghq-code [] {
-    let selected = (ghq list | fzf);
-    if ($selected | is-not-empty) {
-        code (ghq root | str trim | path join $selected)
-    }
-}
-
-let keybind_fuzzy_ghq_code = {
-    name: fuzzy_ghq_code
-    modifier: control_shift
-    keycode: char_g
-    mode: [emacs, vi_normal, vi_insert]
-    event: [
-        {
-            send: executehostcommand
-            cmd: "fuzzy-ghq-code"
-        }
-    ]
-}
-
-let keybind_reload_condfig = {
-    name: reload_config
-    modifier: alt
-    keycode: char_r
-    mode: [emacs, vi_normal, vi_insert]
-    event: [
-        {
-            send: executehostcommand
-            cmd: "source $nu.config-path"
-        }
-    ]
-}
-
-$env.config.keybindings = (
-    $env.config.keybindings
-    | prepend $keybind_reload_condfig
-    | prepend $keybind_fuzzy_ghq_code
-    | uniq-by name
-)
 
 # https://github.com/ajeetdsouza/zoxide
 zoxide init nushell | save -f ~/.zoxide.nu
