@@ -47,6 +47,8 @@ $env.config.keybindings = (
     | prepend $keybind_reload_condfig
     | uniq-by name
 )
+
+# https://github.com/ajeetdsouza/zoxide
 zoxide init nushell | save -f ~/.zoxide.nu
 source ~/.zoxide.nu
 
