@@ -47,6 +47,8 @@ $env.config.keybindings = (
     | prepend $keybind_reload_condfig
     | uniq-by name
 )
+zoxide init nushell | save -f ~/.zoxide.nu
+source ~/.zoxide.nu
 
 # https://www.nushell.sh/cookbook/custom_completers.html
 def "nu-complete zoxide path" [context: string] {
@@ -82,4 +84,4 @@ def --env --wrapped z [...rest: string@"nu-complete zoxide path"] {
   __zoxide_z ...$rest
 }
 
-source ~/.zoxide.nu
+
