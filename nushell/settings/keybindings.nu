@@ -7,7 +7,7 @@ def fz-ghq [] {
 
 let keybind_fuzzy_ghq = {
     name: fuzzy_ghq
-    modifier: control_shift
+    modifier: control
     keycode: char_g
     mode: [emacs, vi_normal, vi_insert]
     event: {
