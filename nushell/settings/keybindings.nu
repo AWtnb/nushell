@@ -49,9 +49,33 @@ let keybind_reload_condfig = {
     }
 }
 
+let keybind_insert_desktop = {
+    name: insert_desktop_path
+    modifier: alt
+    keycode: char_i
+    mode: [emacs, vi_normal, vi_insert]
+    event: {
+        edit: insertstring
+        value: ($env.HOMEPATH | path join "Desktop")
+    }
+}
+
+let keybind_insert_pipe = {
+    name: insert_pipe
+    modifier: alt
+    keycode: char_l
+    mode: [emacs, vi_normal, vi_insert]
+    event: {
+        edit: insertstring
+        value: "|"
+    }
+}
+
 $env.config.keybindings = (
     $env.config.keybindings
     | prepend $keybind_reload_condfig
+    | prepend $keybind_insert_desktop
+    | prepend $keybind_insert_pipe
     | prepend $keybind_fuzzy_okini
     | prepend $keybind_fuzzy_ghq
     | uniq-by name
