@@ -19,6 +19,15 @@ def fz-okini [] {
 
 let custom_bindings = [
     {
+        name: move_word_right_ctrl_n
+        modifier: control
+        keycode: char_n
+        mode: [emacs, vi_normal, vi_insert]
+        event: {
+            send: historyHintWordComplete
+        }
+    },
+    {
         name: fuzzy_ghq
         modifier: control
         keycode: char_g
