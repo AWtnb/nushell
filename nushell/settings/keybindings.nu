@@ -27,56 +27,51 @@ def fz-okini [] {
     }
 }
 
-let keybind_fuzzy_okini = {
-    name: fuzzy_okini
-    modifier: control
-    keycode: char_b
-    mode: [emacs, vi_normal, vi_insert]
-    event: {
-        send: executehostcommand
-        cmd: "cd (fz-okini)"
-    }
-}
-
-let keybind_reload_condfig = {
-    name: reload_config
-    modifier: alt
-    keycode: char_r
-    mode: [emacs, vi_normal, vi_insert]
-    event: {
-        send: executehostcommand
-        cmd: "source $nu.config-path"
-    }
-}
-
-let keybind_insert_desktop = {
-    name: insert_desktop_path
-    modifier: alt
-    keycode: char_i
-    mode: [emacs, vi_normal, vi_insert]
-    event: {
-        edit: insertstring
-        value: ($env.HOMEPATH | path join "Desktop")
-    }
-}
-
-let keybind_insert_pipe = {
-    name: insert_pipe
-    modifier: alt
-    keycode: char_l
-    mode: [emacs, vi_normal, vi_insert]
-    event: {
-        edit: insertstring
-        value: "|"
-    }
-}
+let custom_bindings = [
+    {
+        name: fuzzy_okini
+        modifier: control
+        keycode: char_b
+        mode: [emacs, vi_normal, vi_insert]
+        event: {
+            send: executehostcommand
+            cmd: "cd (fz-okini)"
+        }
+    },
+    {
+        name: reload_config
+        modifier: alt
+        keycode: char_r
+        mode: [emacs, vi_normal, vi_insert]
+        event: {
+            send: executehostcommand
+            cmd: "source $nu.config-path"
+        }
+    },
+    {
+        name: insert_desktop_path
+        modifier: alt
+        keycode: char_i
+        mode: [emacs, vi_normal, vi_insert]
+        event: {
+            edit: insertstring
+            value: ($env.HOMEDRIVE | path join $env.HOMEPATH | path join "Desktop")
+        }
+    },
+    {
+        name: insert_pipe
+        modifier: alt
+        keycode: char_l
+        mode: [emacs, vi_normal, vi_insert]
+        event: {
+            edit: insertstring
+            value: "|"
+        }
+    },
+]
 
 $env.config.keybindings = (
     $env.config.keybindings
-    | prepend $keybind_reload_condfig
-    | prepend $keybind_insert_desktop
-    | prepend $keybind_insert_pipe
-    | prepend $keybind_fuzzy_okini
-    | prepend $keybind_fuzzy_ghq
+    | prepend $custom_bindings
     | uniq-by name
 )
