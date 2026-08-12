@@ -5,16 +5,6 @@ def fz-ghq [] {
     }
 }
 
-let keybind_fuzzy_ghq = {
-    name: fuzzy_ghq
-    modifier: control
-    keycode: char_g
-    mode: [emacs, vi_normal, vi_insert]
-    event: {
-        send: executehostcommand
-        cmd: "cd (fz-ghq)"
-    }
-}
 
 # https://github.com/AWtnb/okini
 def fz-okini [] {
@@ -29,6 +19,16 @@ def fz-okini [] {
 
 let custom_bindings = [
     {
+        name: fuzzy_ghq
+        modifier: control
+        keycode: char_g
+        mode: [emacs, vi_normal, vi_insert]
+        event: {
+            send: executehostcommand
+            cmd: "cd (fz-ghq)"
+        }
+    },
+    {
         name: fuzzy_okini
         modifier: control
         keycode: char_b
@@ -36,16 +36,6 @@ let custom_bindings = [
         event: {
             send: executehostcommand
             cmd: "cd (fz-okini)"
-        }
-    },
-    {
-        name: reload_config
-        modifier: alt
-        keycode: char_r
-        mode: [emacs, vi_normal, vi_insert]
-        event: {
-            send: executehostcommand
-            cmd: "source $nu.config-path"
         }
     },
     {
@@ -66,6 +56,16 @@ let custom_bindings = [
         event: {
             edit: insertstring
             value: "|"
+        }
+    },
+    {
+        name: open_vscode
+        modifier: alt
+        keycode: char_v
+        mode: [emacs, vi_normal, vi_insert]
+        event: {
+            send: executehostcommand
+            cmd: "code ."
         }
     },
 ]
