@@ -9,9 +9,8 @@ $env.config.shell_integration = (
     | reduce {|a, b| $a | merge $b}
 )
 
-
-def hello [] {
-    "Hello, World!"
+def --env "cd.." [] {
+    cd ..
 }
 
 
