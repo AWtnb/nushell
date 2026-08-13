@@ -17,6 +17,15 @@ def "code." [] {
     code .
 }
 
+def "xefm." [] {
+    let desktop = ($nu.home-dir | path join "Desktop")
+    if $env.PWD == $desktop {
+        xefm
+        return
+    }
+    xefm --left . --right $desktop
+}
+
 # https://github.com/ajeetdsouza/zoxide
 zoxide init nushell | save -f ~/.zoxide.nu
 source ~/.zoxide.nu
