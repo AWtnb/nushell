@@ -24,8 +24,60 @@ let custom_bindings = [
         keycode: char_n
         mode: [emacs, vi_normal, vi_insert]
         event: {
-            send: historyHintWordComplete
+            send: HistoryHintWordComplete
         }
+    },
+    {
+        name: wrap_in_bracket
+        modifier: none
+        keycode: "char_["
+        mode: [emacs, vi_normal, vi_insert]
+        event: [
+            {
+                edit: insertstring
+                value: "[]"
+            }
+            { send: Left }
+        ]
+    },
+    {
+        name: wrap_in_single_quote
+        modifier: shift
+        keycode: "char_'"
+        mode: [emacs, vi_normal, vi_insert]
+        event: [
+            {
+                edit: insertstring
+                value: "''"
+            }
+            { send: Left }
+        ]
+    },
+    {
+        name: wrap_in_double_quote
+        modifier: shift
+        keycode: 'char_"'
+        mode: [emacs, vi_normal, vi_insert]
+        event: [
+            {
+                edit: insertstring
+                value: '""'
+            }
+            { send: Left }
+        ]
+    },
+    {
+        name: wrap_in_parenthesis
+        modifier: shift
+        keycode: "char_("
+        mode: [emacs, vi_normal, vi_insert]
+        event: [
+            {
+                edit: insertstring
+                value: "()"
+            }
+            { send: Left }
+        ]
     },
     {
         name: fuzzy_ghq

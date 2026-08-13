@@ -13,6 +13,9 @@ def --env "cd.." [] {
     cd ..
 }
 
+def "code." [] {
+    code .
+}
 
 # https://github.com/ajeetdsouza/zoxide
 zoxide init nushell | save -f ~/.zoxide.nu
