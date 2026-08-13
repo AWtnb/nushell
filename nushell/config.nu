@@ -1,6 +1,6 @@
-# config.nu
-
 source settings/keybindings.nu
+
+$env.config.show_banner = false
 
 # https://memo.laughk.org/articles/2022-11-28-nushell-config-for-wezterm/
 $env.config.shell_integration = (
