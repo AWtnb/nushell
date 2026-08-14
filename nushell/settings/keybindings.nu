@@ -7,7 +7,7 @@ def fz-ghq [] {
 
 
 # https://github.com/AWtnb/okini
-def fz-okini [] {
+def bm [] {
     let selected = (okini --list | fzf);
     if ($selected | is-not-empty) {
         let path = okini --search $selected
@@ -96,7 +96,7 @@ let custom_bindings = [
         mode: [emacs, vi_normal, vi_insert]
         event: {
             send: executehostcommand
-            cmd: "cd (fz-okini)"
+            cmd: "cd (bm)"
         }
     },
     {
