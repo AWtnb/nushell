@@ -1,6 +1,16 @@
 source settings/git.nu
 source settings/keybindings.nu
 
+# https://github.com/JalonWong/nushell-prompt/blob/main/prompt.nu
+source settings/prompt.nu
+$env.PROMPT_COMMAND = {|| par-left-prompt [
+    'dir',
+    'full-git'
+    'duration',
+]}
+$env.PROMPT_INDICATOR = {|| "" }
+$env.PROMPT_COMMAND_RIGHT = {|| "" }
+
 $env.config.show_banner = false
 
 # https://memo.laughk.org/articles/2022-11-28-nushell-config-for-wezterm/
