@@ -28,6 +28,16 @@ let custom_bindings = [
         }
     },
     {
+        name: insert_glob_pattern
+        modifier: alt
+        keycode: "char_:"
+        mode: [emacs, vi_normal, vi_insert]
+        event: {
+            edit: insertstring
+            value: "**/*"
+        }
+    },
+    {
         name: wrap_in_bracket
         modifier: none
         keycode: "char_["
