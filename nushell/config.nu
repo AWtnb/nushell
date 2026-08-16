@@ -41,18 +41,13 @@ def sls [
     pattern: string
     --ignore-case(-i)
 ] {
-    let pat = if $ignore_case { $"(?i)($pattern)" } else { $pattern }
+    let files = $in | each { |it| if ($it | describe) == "string" { $it } else { $it.name } }
 
-    $in | each { |it|
-        let path = if ($it | describe) == "string" { $it } else { $it.name }
-
-        open --raw $path
-        | lines
-        | enumerate
-        | where item =~ $pat
-        | each { |row| {file: $path, line: ($row.index + 1), text: $row.item} }
+    if $ignore_case {
+        rg -i $pattern ...$files
+    } else {
+        rg $pattern ...$files
     }
-    | flatten
 }
 
 # https://github.com/ajeetdsouza/zoxide
