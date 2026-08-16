@@ -41,6 +41,19 @@ let custom_bindings = [
         ]
     },
     {
+        name: wrap_in_bracket
+        modifier: none
+        keycode: "char_{"
+        mode: [emacs, vi_normal, vi_insert]
+        event: [
+            {
+                edit: insertstring
+                value: "{}"
+            }
+            { send: Left }
+        ]
+    },
+    {
         name: wrap_in_single_quote
         modifier: shift
         keycode: "char_'"
