@@ -41,8 +41,8 @@ let custom_bindings = [
         ]
     },
     {
-        name: wrap_in_bracket
-        modifier: none
+        name: wrap_in_brace
+        modifier: shift
         keycode: "char_{"
         mode: [emacs, vi_normal, vi_insert]
         event: [
