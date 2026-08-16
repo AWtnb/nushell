@@ -37,7 +37,23 @@ def "xefm." [] {
     xefm --left . --right $desktop
 }
 
+def sls [
+    pattern: string
+    --ignore-case(-i)
+] {
+    let pat = if $ignore_case { $"(?i)($pattern)" } else { $pattern }
 
+    $in | each { |it|
+        let path = if ($it | describe) == "string" { $it } else { $it.name }
+
+        open --raw $path
+        | lines
+        | enumerate
+        | where item =~ $pat
+        | each { |row| {file: $path, line: ($row.index + 1), text: $row.item} }
+    }
+    | flatten
+}
 
 # https://github.com/ajeetdsouza/zoxide
 zoxide init nushell | save -f ~/.zoxide.nu
