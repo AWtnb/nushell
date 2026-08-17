@@ -19,72 +19,7 @@ let custom_bindings = [
             edit: insertstring
             value: "**/*"
         }
-    },
-    {
-        name: wrap_in_bracket
-        modifier: none
-        keycode: "char_["
-        mode: [emacs, vi_normal, vi_insert]
-        event: [
-            {
-                edit: insertstring
-                value: "[]"
-            }
-            { send: Left }
-        ]
-    },
-    {
-        name: wrap_in_brace
-        modifier: shift
-        keycode: "char_{"
-        mode: [emacs, vi_normal, vi_insert]
-        event: [
-            {
-                edit: insertstring
-                value: "{}"
-            }
-            { send: Left }
-        ]
-    },
-    {
-        name: wrap_in_single_quote
-        modifier: shift
-        keycode: "char_'"
-        mode: [emacs, vi_normal, vi_insert]
-        event: [
-            {
-                edit: insertstring
-                value: "''"
-            }
-            { send: Left }
-        ]
-    },
-    {
-        name: wrap_in_double_quote
-        modifier: shift
-        keycode: 'char_"'
-        mode: [emacs, vi_normal, vi_insert]
-        event: [
-            {
-                edit: insertstring
-                value: '""'
-            }
-            { send: Left }
-        ]
-    },
-    {
-        name: wrap_in_parenthesis
-        modifier: shift
-        keycode: "char_("
-        mode: [emacs, vi_normal, vi_insert]
-        event: [
-            {
-                edit: insertstring
-                value: "()"
-            }
-            { send: Left }
-        ]
-    },
+    }
     {
         name: fuzzy_ghq
         modifier: control
@@ -92,7 +27,7 @@ let custom_bindings = [
         mode: [emacs, vi_normal, vi_insert]
         event: {
             send: executehostcommand
-            cmd: "cd (fz-ghq)"
+            cmd: "fz-ghq"
         }
     },
     {
