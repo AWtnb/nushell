@@ -129,7 +129,7 @@ let custom_bindings = [
         mode: [emacs, vi_normal, vi_insert]
         event: {
             edit: insertstring
-            value: ($env.HOMEDRIVE | path join $env.HOMEPATH | path join "Desktop")
+            value: ($env.HOMEDRIVE | path join $env.HOMEPATH | path join "Desktop\\")
         }
     },
     {
