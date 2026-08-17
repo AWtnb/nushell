@@ -30,11 +30,11 @@ def "code." [] {
 
 def "xefm." [] {
     let desktop = ($nu.home-dir | path join "Desktop")
-    if $env.PWD == $desktop {
-        xefm
-        return
+    mut rightPath = "."
+    if $env.PWD != $desktop {
+        $rightPath = $desktop
     }
-    xefm --left . --right $desktop
+    xefm --left . --right $rightPath
 }
 
 def sls [
