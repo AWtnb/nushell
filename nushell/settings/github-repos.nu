@@ -1,10 +1,4 @@
-def open-url [url: string] {
-    match $nu.os-info.name {
-        "macos" => { ^open $url }
-        "windows" => { ^cmd.exe /c start $url }
-        _ => { ^xdg-open $url }
-    }
-}
+source commands.nu
 
 def open-git-remote [remote: string = "origin"] {
     let target_section = $"[remote \"($remote)\"]"

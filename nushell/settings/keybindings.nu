@@ -1,21 +1,4 @@
-def fz-ghq [] {
-    let selected = (ghq list | fzf);
-    if ($selected | is-not-empty) {
-        return (ghq root | str trim | path join $selected)
-    }
-}
-
-
-# https://github.com/AWtnb/okini
-def bm [] {
-    let selected = (okini --list | fzf);
-    if ($selected | is-not-empty) {
-        let path = okini --search $selected
-        if ($path | is-not-empty)  {
-            return $path
-        }
-    }
-}
+source commands.nu
 
 let custom_bindings = [
     {
