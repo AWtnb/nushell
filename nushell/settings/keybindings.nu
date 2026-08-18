@@ -9,7 +9,35 @@ let custom_bindings = [
         event: {
             send: HistoryHintWordComplete
         }
-    },
+    }
+    {
+        name: explore_last_commnd
+        modifier: alt
+        keycode: char_e
+        mode: [emacs, vi_normal, vi_insert]
+        event: [
+            {send: Up}
+            {
+                edit: insertstring
+                value: "| explore"
+            }
+        ]
+    }
+    {
+        name: insert_func
+        modifier: alt
+        keycode: char_f
+        mode: [emacs, vi_normal, vi_insert]
+        event: [
+            {
+                edit: insertstring
+                value: "{|| }"
+            }
+            { send: Left }
+            { send: Left }
+            { send: Left }
+        ]
+    }
     {
         name: insert_glob_pattern
         modifier: alt
@@ -29,7 +57,7 @@ let custom_bindings = [
             send: executehostcommand
             cmd: "fz-ghq"
         }
-    },
+    }
     {
         name: fuzzy_okini
         modifier: control
@@ -39,7 +67,7 @@ let custom_bindings = [
             send: executehostcommand
             cmd: "cd (bm)"
         }
-    },
+    }
     {
         name: insert_desktop_path
         modifier: alt
@@ -49,7 +77,7 @@ let custom_bindings = [
             edit: insertstring
             value: ($env.HOMEDRIVE | path join $env.HOMEPATH | path join "Desktop\\")
         }
-    },
+    }
     {
         name: insert_pipe
         modifier: alt
@@ -59,7 +87,7 @@ let custom_bindings = [
             edit: insertstring
             value: "|"
         }
-    },
+    }
     {
         name: open_vscode
         modifier: alt
@@ -69,7 +97,7 @@ let custom_bindings = [
             send: executehostcommand
             cmd: "code ."
         }
-    },
+    }
 ]
 
 $env.config.keybindings = (
