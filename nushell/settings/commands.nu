@@ -48,6 +48,10 @@ def --env "cd.." [] {
     cd ..
 }
 
+def --env cdc [] {
+    cd (clip paste)
+}
+
 def "code." [] {
     code .
 }
@@ -66,10 +70,15 @@ def sls [
     --ignore-case(-i)
 ] {
     let files = $in | each { |it| if ($it | describe) == "string" { $it } else { $it.name } }
+    let flags = if $ignore_case { [-i --color=always] } else { [--color=always] }
 
-    if $ignore_case {
-        rg -i $pattern ...$files
-    } else {
-        rg $pattern ...$files
+    $files
+    | chunks 100
+    | each { |chunk|
+        let result = (do { rg ...$flags $pattern ...$chunk } | complete)
+        if (0 == $result.exit_code) { $result.stdout } else { "" }
     }
+    | where { |it| ("" != $it) }
+    | str join ""
+    | print --raw
 }
