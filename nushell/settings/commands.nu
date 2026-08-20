@@ -82,3 +82,13 @@ def sls [
     | str join ""
     | print --raw
 }
+
+def sieve [--net] {
+    $in | lines | where {|line|
+        if $net {
+            ($line | str trim) != ""
+        } else {
+            $line != ""
+        }
+    }
+}
