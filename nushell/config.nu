@@ -2,12 +2,12 @@ source settings/github-repos.nu
 source settings/keybindings.nu
 source settings/commands.nu
 
+# https://github.com/nushell/nu_scripts/tree/main/modules/prompt
 # https://github.com/JalonWong/nushell-prompt/blob/main/prompt.nu
 source settings/prompt.nu
 $env.PROMPT_COMMAND = {|| par-left-prompt [
-    'dir',
-    'full-git'
-    'duration',
+    "dir",
+    "full-git"
 ]}
 $env.PROMPT_INDICATOR = {|| "" }
 $env.PROMPT_COMMAND_RIGHT = {|| "" }
