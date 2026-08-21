@@ -1,6 +1,6 @@
 def --env fz-ghq [] {
     let root = (ghq root | str trim)
-    let result = (ghq list | fzf --expect="ctrl-o,ctrl-i,ctrl-n" | lines)
+    let result = (ghq list | fzf --expect="ctrl-v,ctrl-n" | lines)
 
     if ($result | is-empty) {
         return
@@ -15,7 +15,7 @@ def --env fz-ghq [] {
 
     let path = ($root | path join $selected)
 
-    if ($key == "ctrl-o" or $key == "ctrl-i" or $key == "ctrl-n") {
+    if ($key == "ctrl-i" or $key == "ctrl-v") {
         code $path
         return
     }
