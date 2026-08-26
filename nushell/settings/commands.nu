@@ -92,3 +92,34 @@ def sieve [--net] {
         }
     }
 }
+
+
+def restart-corvusskk-server [] {
+    let path = (
+        ^powershell -NoProfile -Command "(Get-Process -Name crvskkserv -ErrorAction SilentlyContinue).Path"
+        | str trim
+    )
+
+    if ($path | is-empty) {
+        return
+    }
+
+    ps | where name == "crvskkserv" | each { |row| ^taskkill /F /PID $row.pid }
+    start $path
+}
+
+def restart-corvusskk [--with-server] {
+    let path = (
+        ^powershell -NoProfile -Command "(Get-Process -Name imcrvmgr -ErrorAction SilentlyContinue).Path"
+        | str trim
+    )
+
+    if (0 < ($path | str length)) {
+        ps | where name == "imcrvmgr" | each { |row| ^taskkill /F /PID $row.pid }
+        start $path
+    }
+
+    if $with_server {
+        restart-corvusskk-server
+    }
+}
