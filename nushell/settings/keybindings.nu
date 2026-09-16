@@ -11,6 +11,30 @@ let custom_bindings = [
         }
     }
     {
+        name: paste_from_clipboard
+        modifier: alt
+        keycode: char_p
+        mode: [emacs, vi_normal, vi_insert]
+        event: [
+            {
+                edit: insertstring
+                value: "clip paste"
+            }
+        ]
+    }
+    {
+        name: copy_to_clipboard
+        modifier: alt
+        keycode: char_c
+        mode: [emacs, vi_normal, vi_insert]
+        event: [
+            {
+                edit: insertstring
+                value: "| to text | clip copy"
+            }
+        ]
+    }
+    {
         name: explore_last_commnd
         modifier: alt
         keycode: char_e
