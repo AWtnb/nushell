@@ -94,7 +94,7 @@ def sieve [--net] {
 }
 
 
-def --env restart-corvusskk-server [] {
+def restart-corvusskk-server [] {
     let path = (
         ^powershell -NoProfile -Command "(Get-Process -Name crvskkserv -ErrorAction SilentlyContinue).Path"
         | str trim
@@ -104,18 +104,18 @@ def --env restart-corvusskk-server [] {
         return
     }
 
-    ps | where name == "crvskkserv" | each { |row| ^taskkill /F /PID $row.pid }
-    start $path
+    ps | where name == "crvskkserv.exe" | each { |row| ^taskkill /F /PID $row.pid }
+    start path
 }
 
-def --env restart-corvusskk [--with-server] {
+def restart-corvusskk [--with-server] {
     let path = (
         ^powershell -NoProfile -Command "(Get-Process -Name imcrvmgr -ErrorAction SilentlyContinue).Path"
         | str trim
     )
 
     if (0 < ($path | str length)) {
-        ps | where name == "imcrvmgr" | each { |row| ^taskkill /F /PID $row.pid }
+        ps | where name == "imcrvmgr.exe" | each { |row| ^taskkill /F /PID $row.pid }
         start $path
     }
 
