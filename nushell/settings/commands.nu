@@ -23,18 +23,6 @@ def --env fz-ghq [] {
     cd $path
 }
 
-
-# https://github.com/AWtnb/okini
-def bm [] {
-    let selected = (okini --list | fzf);
-    if ($selected | is-not-empty) {
-        let path = okini --search $selected
-        if ($path | is-not-empty)  {
-            return $path
-        }
-    }
-}
-
 def open-url [url: string] {
     match $nu.os-info.name {
         "macos" => { ^open $url }

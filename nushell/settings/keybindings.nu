@@ -83,16 +83,6 @@ let custom_bindings = [
         }
     }
     {
-        name: fuzzy_okini
-        modifier: control
-        keycode: char_b
-        mode: [emacs, vi_normal, vi_insert]
-        event: {
-            send: executehostcommand
-            cmd: "cd (bm)"
-        }
-    }
-    {
         name: insert_desktop_path
         modifier: alt
         keycode: char_i
