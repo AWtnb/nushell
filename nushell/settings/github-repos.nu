@@ -37,8 +37,8 @@ def open-git-remote [remote: string = "origin"] {
     open-url $web_url
 }
 
-# https://github.com/kawarimidoll/gh-q
-def open-github-repo [--owner: string] {
+# open my remote repo such as https://github.com/kawarimidoll/gh-q
+def gh-q-launch [--owner: string] {
     let target_owner = if $owner == null {
         gh api user -q .login | str trim
     } else {
