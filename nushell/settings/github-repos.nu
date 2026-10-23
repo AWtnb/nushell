@@ -37,7 +37,7 @@ def open-git-remote [remote: string = "origin"] {
     open-url $web_url
 }
 
-# open my remote repo such as https://github.com/kawarimidoll/gh-q
+# open remote repo such as https://github.com/kawarimidoll/gh-q
 def gh-q-launch [--owner: string] {
     let target_owner = if $owner == null {
         gh api user -q .login | str trim
@@ -57,8 +57,7 @@ query ($owner: String!, $endCursor: String) {
 '
 
     let selected = (
-        gh api graphql --paginate -F $"owner=($target_owner)" -f $"query=($query)"
-            -q '.data.repositoryOwner.repositories.nodes[].nameWithOwner'
+        gh api graphql --paginate -F $"owner=($target_owner)" -f $"query=($query)" -q '.data.repositoryOwner.repositories.nodes[].nameWithOwner' err> nul
         | ^fzf
         | str trim
     )
