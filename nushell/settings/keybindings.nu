@@ -103,13 +103,13 @@ let custom_bindings = [
         }
     }
     {
-        name: open_vscode
+        name: open_xefm
         modifier: alt
-        keycode: char_v
+        keycode: char_x
         mode: [emacs, vi_normal, vi_insert]
         event: {
             send: executehostcommand
-            cmd: "code ."
+            cmd: "xefm --left . --right ~/Desktop"
         }
     }
 ]
