@@ -103,9 +103,9 @@ let custom_bindings = [
         }
     }
     {
-        name: open_xefm
+        name: open_xefm_filer
         modifier: alt
-        keycode: char_x
+        keycode: char_f
         mode: [emacs, vi_normal, vi_insert]
         event: {
             send: executehostcommand
