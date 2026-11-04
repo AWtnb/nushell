@@ -7,11 +7,12 @@ source settings/prompt.jalon.nu
 
 source settings/prompt.nu
 
-$env.PROMPT_COMMAND = {|| custom-left-prompt [
+$env.PROMPT_COMMAND = {|| par-left-prompt [
+    "dir",
     "full-git"
 ]}
 $env.PROMPT_INDICATOR = {|| "" }
-$env.PROMPT_COMMAND_RIGHT = {|| "" }
+$env.PROMPT_COMMAND_RIGHT = {|| remote-link }
 
 $env.config.show_banner = false
 

@@ -36,25 +36,11 @@ def branch-web-url [] {
     $'($url)/tree/($branch)'
 }
 
-def git-link [] {
-    let styled = (full-git-style)
-    if ($styled | is-empty) {
+export def remote-link [] {
+    let url = (branch-web-url)
+    if ($url | is-empty) {
         return ''
     }
 
-    let url = (branch-web-url)
-    if ($url | is-empty) {
-        return $styled
-    }
-
-    $url | ansi link --text $styled
-}
-
-export def custom-left-prompt [modules: list] {
-    let others = ($modules | where {|name| $name != 'full-git' })
-    let dir = (exec-module 'dir')
-    let git = (git-link)
-    let rest = (par-left-prompt $others)
-
-    $'(ansi reset)($dir) ($git) ($rest)'
+    $url | ansi link --text '[remote]'
 }
