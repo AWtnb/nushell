@@ -1,5 +1,6 @@
 source commands.nu
 
+# open remote repository in browser, default remote is "origin"
 def open-git-remote [remote: string = "origin"] {
     let target_section = $"[remote \"($remote)\"]"
 
@@ -37,8 +38,7 @@ def open-git-remote [remote: string = "origin"] {
     open-url $web_url
 }
 
-# open remote repo such as https://github.com/kawarimidoll/gh-q
-def gh-q-launch [--owner: string] {
+def browse-repo [--owner: string] {
     let target_owner = if $owner == null {
         gh api user -q .login | str trim
     } else {
