@@ -13,31 +13,8 @@ def remote-web-url [] {
     | str replace -r '\.git$' ''
 }
 
-def current-branch [] {
-    let rst = (do { git --no-optional-locks branch --show-current } | complete)
-    if $rst.exit_code != 0 {
-        return ''
-    }
-
-    $rst.stdout | str trim
-}
-
-def branch-web-url [] {
-    let url = (remote-web-url)
-    if ($url | is-empty) {
-        return ''
-    }
-
-    let branch = (current-branch)
-    if ($branch | is-empty) {
-        return $url
-    }
-
-    $'($url)/tree/($branch)'
-}
-
 export def remote-link [] {
-    let url = (branch-web-url)
+    let url = (remote-web-url)
     if ($url | is-empty) {
         return ''
     }

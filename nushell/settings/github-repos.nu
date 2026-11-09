@@ -1,44 +1,6 @@
 source commands.nu
 
-# open remote repository in browser, default remote is "origin"
-def open-git-remote [remote: string = "origin"] {
-    let target_section = $"[remote \"($remote)\"]"
-
-    let lines = (open .git/config --raw | lines)
-
-    mut in_section = false
-    mut url = ""
-
-    for line in $lines {
-        let trimmed = ($line | str trim)
-
-        if ($trimmed | str starts-with "[") {
-            $in_section = ($trimmed == $target_section)
-            continue
-        }
-
-        if $in_section and ($trimmed | str starts-with "url") {
-            $url = ($trimmed | split row "=" | skip 1 | str join "=" | str trim)
-            break
-        }
-    }
-
-    if $url == "" {
-        print $"Remote '($remote)' not found."
-        return
-    }
-
-    let web_url = if ($url | str starts-with "git@") {
-        $url | str replace -r '^git@([^:]+):(.*)\.git$' 'https://$1/$2'
-    } else {
-        $url | str replace -r '\.git$' ''
-    }
-
-    print $web_url
-    open-url $web_url
-}
-
-def browse-repo [--owner: string] {
+def open-git-remotes [--owner: string] {
     let target_owner = if $owner == null {
         gh api user -q .login | str trim
     } else {
@@ -58,15 +20,19 @@ query ($owner: String!, $endCursor: String) {
 
     let selected = (
         gh api graphql --paginate -F $"owner=($target_owner)" -f $"query=($query)" -q '.data.repositoryOwner.repositories.nodes[].nameWithOwner' err> nul
-        | ^fzf
-        | str trim
+      | ^fzf --multi
+      | lines
+      | each { |line| $line | str trim }
+      | where {|line| $line != "" }
     )
 
-    if $selected == "" {
+    if ($selected | is-empty) {
         return
     }
 
-    let url = $"https://github.com/($selected)"
-    print $url
-    open-url $url
+    for repo in $selected {
+      let url = $"https://github.com/($repo)"
+      print $url
+      open-url $url
+    }
 }
