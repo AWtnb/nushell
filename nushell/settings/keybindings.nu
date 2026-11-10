@@ -104,7 +104,7 @@ let custom_bindings = [
     }
     {
         name: open_xefm_filer
-        modifier: alt
+        modifier: control
         keycode: char_f
         mode: [emacs, vi_normal, vi_insert]
         event: {
