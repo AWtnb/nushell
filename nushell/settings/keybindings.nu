@@ -48,21 +48,6 @@ let custom_bindings = [
         ]
     }
     {
-        name: insert_func
-        modifier: alt
-        keycode: char_f
-        mode: [emacs, vi_normal, vi_insert]
-        event: [
-            {
-                edit: insertstring
-                value: "{|| }"
-            }
-            { send: Left }
-            { send: Left }
-            { send: Left }
-        ]
-    }
-    {
         name: insert_glob_pattern
         modifier: alt
         keycode: "char_:"
@@ -104,7 +89,7 @@ let custom_bindings = [
     }
     {
         name: open_xefm_filer
-        modifier: control
+        modifier: alt
         keycode: char_f
         mode: [emacs, vi_normal, vi_insert]
         event: {
